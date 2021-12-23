@@ -1,11 +1,7 @@
 #!/bin/sh
-
-set -e
-
+# inject the nev variables into the config file using envsubst
 config='/etc/martin/config.yaml'
-sed -i '/^connection_string:.*/d' $config
-sed -i '/^listen_addresses:.*/d' $config
-echo connection_string: $DATABASE_URL >> $config
-echo listen_addresses: "$LISTEN_ADDRESSES" >> $config
-
-martin --config /etc/martin/config.yaml
+tmp_config='/etc/martin/tmp_config.yaml'
+envsubst < $config > $tmp_config
+mv $tmp_config $config
+martin --config $config

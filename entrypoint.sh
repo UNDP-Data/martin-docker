@@ -1,11 +1,14 @@
 #!/bin/sh
-
 set -e
+# inject the env variables into the config file using envsubst
+CONFIG='/etc/martin/config.yaml'
 
-config='/etc/martin/config.yaml'
-sed -i '/^connection_string:.*/d' $config
-sed -i '/^listen_addresses:.*/d' $config
-echo connection_string: $DATABASE_URL >> $config
-echo listen_addresses: "$LISTEN_ADDRESSES" >> $config
+if grep -Fq "\$DATABASE_URL" $CONFIG
+then
+    TMP_CONFIG='/etc/martin/tmp_config.yaml'
+    envsubst < $CONFIG > $TMP_CONFIG
+    cat $TMP_CONFIG > $CONFIG
+    rm -rf $TMP_CONFIG
+fi
 
-martin --config /etc/martin/config.yaml
+martin --config $CONFIG

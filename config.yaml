@@ -1,6 +1,6 @@
-listen_addresses: '0.0.0.0:3000'
+listen_addresses: '$LISTEN_ADDRESSES'
 
-connection_string: 'postgres://geohubusr:W%40s%243qklin@undp-ngd-psql-gishub-01-dev.postgres.database.azure.com/geodata?sslmode=require'
+connection_string: '$DATABASE_URL'
 
 pool_size: 20
 

@@ -1,78 +1,563 @@
----
-# The socket address to bind [default: 0.0.0.0:3000]
-listen_addresses: '0.0.0.0:3000'
+listen_address: '0.0.0.0:3000'
 
-# Database connection string
-connection_string: 'your database connection string'
 
-# Maximum connections pool size [default: 20]
 pool_size: 20
 
-# Connection keep alive timeout [default: 75]
 keep_alive: 75
 
-# Number of web server workers
-worker_processes: 8
+woker_processes: 8
 
-# Enable watch mode
 watch: false
 
-# Trust invalid certificates. This introduces significant vulnerabilities, and should only be used as a last resort.
 danger_accept_invalid_certs: true
 
-# Associative arrays of table sources
+
 table_sources:
-  zambia.poverty:
-    # Table source id (required)
-    id: zambia.poverty
 
-    # Table schema (required)
-    schema: zambia
 
-    # Table name (required)
-    table: poverty
+  electricity.access_2016:
 
-    # Geometry SRID (required)
-    srid: 3857
+    id: electricity.access_2016
 
-    # Geometry column name (required)
+    schema: electricity
+
+    table: access_2016
+
+    bounds: [-140.904611376953, -53.3558614501953, 140.99881729, 76.4502118652344]
+
+    srid: 4326
+
     geometry_column: geom
 
-    # Feature id column name
-    #id_column: ~
-    #id_column: fid
+    id_column: ~
 
-    # An integer specifying the minimum zoom level
-    minzoom: 0
-
-    # An integer specifying the maximum zoom level. MUST be >= minzoom
-    maxzoom: 30
-
-    # The maximum extent of available map tiles. Bounds MUST define an area
-    # covered by all zoom levels. The bounds are represented in WGS:84
-    # latitude and longitude values, in the order left, bottom, right, top.
-    # Values may be integers or floating point numbers.
-    #bounds: [-180.0, -90.0, 180.0, 90.0]
-    bounds: [21.9993709729921534,-18.0794725018542977 , 33.7057045762053917,-8.2243600007133182]
-    
-
-    # Tile extent in tile coordinate space
     extent: 4096
 
-    # Buffer distance in tile coordinate space to optionally clip geometries
     buffer: 64
 
-    # Boolean to control if geometries should be clipped or encoded as is
-    clip_geom: true
+    geometry_type: POINT
 
-    # Geometry type
+    clip_geometry: true
+
+
+    properties:
+
+      cnt: varchar
+
+      fid: int4
+
+      lat: float8
+
+      lon: float8
+
+      sub: varchar
+
+      val: float8
+
+      area: varchar
+
+      dist: varchar
+
+
+  electricity.access_2012:
+
+    id: electricity.access_2012
+
+    schema: electricity
+
+    table: access_2012
+
+    bounds: [-139.517966455078, -53.3852614501953, 140.99875537, 73.1185358764649]
+
+    srid: 4326
+
+    geometry_column: geom
+
+    id_column: ~
+
+    extent: 4096
+
+    buffer: 64
+
+    geometry_type: POINT
+
+    clip_geometry: true
+
+
+    properties:
+
+      cnt: varchar
+
+      fid: int4
+
+      lat: float8
+
+      lon: float8
+
+      sub: varchar
+
+      val: float8
+
+      area: varchar
+
+      dist: varchar
+
+
+  zambia.poverty:
+
+    id: zambia.poverty
+
+    schema: zambia
+
+    table: poverty
+
+    bounds: [21.99937097299215, -18.07947250185431, 33.70570457620539, -8.224360000713332]
+
+    srid: 3857
+
+    geometry_column: geom
+
+    id_column: ~
+
+    extent: 4096
+
+    buffer: 64
+
     geometry_type: MULTIPOLYGON
 
-    # List of columns, that should be encoded as tile properties (required)
+    clip_geometry: true
+
+
     properties:
-      fid: int4
+
+      id: int4
+
+      ctr: float8
+
+      fid: int8
+
+      cst_n: varchar
+
+      ctr_n: varchar
+
+      cst_n_1: varchar
+
       district: varchar
+
+      gred_cst: float8
+
+      num_poor: float8
+
       province: varchar
+
+      std_error: float8
+
+      constitu_1: float8
+
+      constituen: varchar
+
+      districtco: float8
+
       povertyhea: float8
 
+      provinceco: float8
 
+
+  global.ne_10m_land:
+
+    id: global.ne_10m_land
+
+    schema: global
+
+    table: ne_10m_land
+
+    bounds: [-179.9999999999999, -85.0, 180.0, 83.63410065300008]
+
+    srid: 3857
+
+    geometry_column: geom3857
+
+    id_column: ~
+
+    extent: 4096
+
+    buffer: 64
+
+    geometry_type: MULTIPOLYGON
+
+    clip_geometry: true
+
+
+    properties:
+
+      id: int4
+
+      min_zoom: float8
+
+      scalerank: int4
+
+      featurecla: varchar
+
+
+  global.gadm1:
+
+    id: global.gadm1
+
+    schema: global
+
+    table: gadm1
+
+    bounds: [-180.0, -55.98402786, 180.0, 83.65833282470703]
+
+    srid: 3857
+
+    geometry_column: geom3857
+
+    id_column: ~
+
+    extent: 4096
+
+    buffer: 64
+
+    geometry_type: MULTIPOLYGON
+
+    clip_geometry: true
+
+
+    properties:
+
+      gid: int4
+
+      cc_1: varchar
+
+      gid_0: varchar
+
+      gid_1: varchar
+
+      hasc_1: varchar
+
+      name_0: varchar
+
+      name_1: varchar
+
+      type_1: varchar
+
+      engtype_1: varchar
+
+      nl_name_1: varchar
+
+      varname_1: varchar
+
+
+  global.ne_10m_land_3857:
+
+    id: global.ne_10m_land_3857
+
+    schema: global
+
+    table: ne_10m_land_3857
+
+    bounds: [-179.99998854118687, -89.00000000000217, 179.99998854118684, 83.63410065304986]
+
+    srid: 3857
+
+    geometry_column: geom
+
+    id_column: ~
+
+    extent: 4096
+
+    buffer: 64
+
+    geometry_type: MULTIPOLYGON
+
+    clip_geometry: true
+
+
+    properties:
+
+      id: int4
+
+      OBJECTID: int8
+
+      min_zoom: float8
+
+      scalerank: int4
+
+      Shape_Area: float8
+
+      featurecla: varchar
+
+      Shape_Length: float8
+
+
+  global.gadm2:
+
+    id: global.gadm2
+
+    schema: global
+
+    table: gadm2
+
+    bounds: [-180.0, -55.98402786, 180.0, 83.11042022999999]
+
+    srid: 3857
+
+    geometry_column: geom3857
+
+    id_column: ~
+
+    extent: 4096
+
+    buffer: 64
+
+    geometry_type: MULTIPOLYGON
+
+    clip_geometry: true
+
+
+    properties:
+
+      gid: int4
+
+      cc_2: varchar
+
+      gid_0: varchar
+
+      gid_1: varchar
+
+      gid_2: varchar
+
+      hasc_2: varchar
+
+      name_0: varchar
+
+      name_1: varchar
+
+      name_2: varchar
+
+      type_2: varchar
+
+      engtype_2: varchar
+
+      nl_name_1: varchar
+
+      nl_name_2: varchar
+
+      varname_2: varchar
+
+
+  global.gadm3:
+
+    id: global.gadm3
+
+    schema: global
+
+    table: gadm3
+
+    bounds: [-179.99999999999991, -55.98402786254877, 180.0, 83.11042022705084]
+
+    srid: 3857
+
+    geometry_column: geom3857
+
+    id_column: ~
+
+    extent: 4096
+
+    buffer: 64
+
+    geometry_type: MULTIPOLYGON
+
+    clip_geometry: true
+
+
+    properties:
+
+      gid: int4
+
+      cc_3: varchar
+
+      gid_0: varchar
+
+      gid_1: varchar
+
+      gid_2: varchar
+
+      gid_3: varchar
+
+      hasc_3: varchar
+
+      name_0: varchar
+
+      name_1: varchar
+
+      name_2: varchar
+
+      name_3: varchar
+
+      type_3: varchar
+
+      engtype_3: varchar
+
+      nl_name_1: varchar
+
+      nl_name_2: varchar
+
+      nl_name_3: varchar
+
+      varname_3: varchar
+
+
+  global.gadm4:
+
+    id: global.gadm4
+
+    schema: global
+
+    table: gadm4
+
+    bounds: [-74.48124694824219, -34.83514022827143, 141.0193939208984, 70.0914535522462]
+
+    srid: 3857
+
+    geometry_column: geom3857
+
+    id_column: ~
+
+    extent: 4096
+
+    buffer: 64
+
+    geometry_type: MULTIPOLYGON
+
+    clip_geometry: true
+
+
+    properties:
+
+      gid: int4
+
+      cc_4: varchar
+
+      gid_0: varchar
+
+      gid_1: varchar
+
+      gid_2: varchar
+
+      gid_3: varchar
+
+      gid_4: varchar
+
+      name_0: varchar
+
+      name_1: varchar
+
+      name_2: varchar
+
+      name_3: varchar
+
+      name_4: varchar
+
+      type_4: varchar
+
+      engtype_4: varchar
+
+      varname_4: varchar
+
+
+  global.gadm5:
+
+    id: global.gadm5
+
+    schema: global
+
+    table: gadm5
+
+    bounds: [-5.143751144409175, -2.839972734451237, 30.899072647094798, 51.08939743041996]
+
+    srid: 3857
+
+    geometry_column: geom3857
+
+    id_column: ~
+
+    extent: 4096
+
+    buffer: 64
+
+    geometry_type: MULTIPOLYGON
+
+    clip_geometry: true
+
+
+    properties:
+
+      gid: int4
+
+      cc_5: varchar
+
+      gid_0: varchar
+
+      gid_1: varchar
+
+      gid_2: varchar
+
+      gid_3: varchar
+
+      gid_4: varchar
+
+      gid_5: varchar
+
+      name_0: varchar
+
+      name_1: varchar
+
+      name_2: varchar
+
+      name_3: varchar
+
+      name_4: varchar
+
+      name_5: varchar
+
+      type_5: varchar
+
+      engtype_5: varchar
+
+
+  global.gadm0:
+
+    id: global.gadm0
+
+    schema: global
+
+    table: gadm0
+
+    bounds: [-180.0, -85.0, 180.0, 83.65833282]
+
+    srid: 3857
+
+    geometry_column: geom3857
+
+    id_column: ~
+
+    extent: 4096
+
+    buffer: 64
+
+    geometry_type: MULTIPOLYGON
+
+    clip_geometry: true
+
+
+    properties:
+
+      gid: int4
+
+      gid_0: varchar
+
+      name_0: varchar
+connection_string: postgres://geohubusr:W%40s%243qklin@undp-ngd-psql-gishub-01-dev.postgres.database.azure.com/geodata?sslmode=require
+listen_addresses: 0.0.0.0:3000

@@ -4,8 +4,7 @@ RUN apk add curl
 RUN apk add gettext
 
 RUN mkdir -p /etc/martin
-COPY entrypoint.sh /etc/martin/entrypoint.sh
-RUN chmod +x /etc/martin/entrypoint.sh
-RUN echo $(ls -als /etc/martin/entrypoint.sh)
+COPY entrypoint.sh /usr/bin/entrypoint.sh
+
 WORKDIR /etc/martin
-ENTRYPOINT ["/bin/sh", "/etc/martin/entrypoint.sh"]
+ENTRYPOINT /usr/bin/entrypoint.sh

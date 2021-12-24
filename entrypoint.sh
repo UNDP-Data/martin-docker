@@ -1,5 +1,6 @@
 #!/bin/sh
-set -e
+
+
 # inject the env variables into the config file using envsubst
 CONFIG="/etc/martin/config.yaml"
 

@@ -17,7 +17,7 @@ CONFIG="/etc/martin/config.yaml"
 #extract the value from config.yaml
 DBURL=$(grep -R "\$DATABASE_URL" $CONFIG |  awk '/:/ {print $2}')
 
-#if it is not set
+#if it is not set interpolate
 if [ "$DBURL" = "'\$DATABASE_URL'" ]
 then
     echo "Interpolating env vars into $CONFIG ..."

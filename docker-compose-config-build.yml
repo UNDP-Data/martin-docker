@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  martin:
+    image: martin-config-builder:latest
+    build:
+      context: ./martin-config
+      dockerfile: Dockerfile
+    entrypoint: "/home/undp/app/entrypoint.sh"
+    environment:
+      - SCHEMES=public global zambia
+      - DATABASE_CONNECTION=$DATABASE_URL
+    volumes:
+      - ./config.yaml:/home/undp/app/config.yaml
+
+
+

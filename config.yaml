@@ -16,6 +16,118 @@ danger_accept_invalid_certs: true
 table_sources:
 
 
+  zambia.poverty:
+
+    id: zambia.poverty
+
+    schema: zambia
+
+    table: poverty
+
+    bounds: [21.99937075303238, -18.07947347592123, 33.705705741754244, -8.224359676087436]
+
+    srid: 3857
+
+    geometry_column: geom
+
+    id_column: ~
+
+    extent: 4096
+
+    buffer: 64
+
+    geometry_type: MULTIPOLYGON
+
+    clip_geometry: true
+
+
+    properties:
+
+      id: int4
+
+      ctr: float8
+
+      fid: int8
+
+      cst_n: varchar
+
+      ctr_n: varchar
+
+      cst_n_1: varchar
+
+      district: varchar
+
+      gred_cst: float8
+
+      num_poor: float8
+
+      province: varchar
+
+      std_error: float8
+
+      constitu_1: float8
+
+      constituen: varchar
+
+      districtco: float8
+
+      povertyhea: float8
+
+      provinceco: float8
+
+
+  global.unadmin0:
+
+    id: global.unadmin0
+
+    schema: global
+
+    table: unadmin0
+
+    bounds: [-180.0, -89.0, 180.0, 83.62295532226562]
+
+    srid: 4326
+
+    geometry_column: geom
+
+    id_column: ~
+
+    extent: 4096
+
+    buffer: 64
+
+    geometry_type: MULTIPOLYGON
+
+    clip_geometry: true
+
+
+    properties:
+
+      id: int4
+
+      fid: int8
+
+      CONTCD: varchar
+
+      ISO3CD: varchar
+
+      ISOADM: varchar
+
+      MAPLAB: varchar
+
+      ROMNAM: varchar
+
+      STSCOD: varchar
+
+      GlobalID: varchar
+
+      OBJECTID: int8
+
+      Shape.STArea(): float8
+
+      Shape.STLength(): float8
+
+
   global.ne_10m_land:
 
     id: global.ne_10m_land
@@ -378,63 +490,3 @@ table_sources:
       type_5: varchar
 
       engtype_5: varchar
-
-
-  zambia.poverty:
-
-    id: zambia.poverty
-
-    schema: zambia
-
-    table: poverty
-
-    bounds: [21.99937075303238, -18.07947347592123, 33.705705741754244, -8.224359676087436]
-
-    srid: 3857
-
-    geometry_column: geom
-
-    id_column: ~
-
-    extent: 4096
-
-    buffer: 64
-
-    geometry_type: MULTIPOLYGON
-
-    clip_geometry: true
-
-
-    properties:
-
-      id: int4
-
-      ctr: float8
-
-      fid: int8
-
-      cst_n: varchar
-
-      ctr_n: varchar
-
-      cst_n_1: varchar
-
-      district: varchar
-
-      gred_cst: float8
-
-      num_poor: float8
-
-      province: varchar
-
-      std_error: float8
-
-      constitu_1: float8
-
-      constituen: varchar
-
-      districtco: float8
-
-      povertyhea: float8
-
-      provinceco: float8

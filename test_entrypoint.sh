@@ -1,8 +1,14 @@
-#!/bin/sh
+#!/bin/bash
+
+if [ -f .env ]; then
+    # Load Environment Variables
+    export $(cat .env | grep -v '#' | awk '/=/ {print $1}')
+
+fi
 
 
-# exit with error code 1 if the env variable DATABASE_URL is not set or empty
 
+#if [ -z "$DATABASE_URL" ]
 if [ -z "$DATABASE_URL" ] && [ -z ${DATABASE_URL} ]
 then
   echo "DATABASE_URL is not set. The vector tile server can not connect to PostGIS server."
@@ -12,12 +18,11 @@ fi
 
 
 # inject the env variables into the config file using envsubst
-CONFIG="/etc/martin/config.yaml"
-
-#extract the value from config.yaml
+CONFIG="./config.yaml"
+#extract the vakue from config
 DBURL=$(grep -R "\$DATABASE_URL" $CONFIG |  awk '/:/ {print $2}')
 
-#if it is not set interpolate
+#if grep -Fq "\$DATABASE_URL" $CONFIG
 if [ "$DBURL" = "'\$DATABASE_URL'" ]
 then
     echo "Interpolating env vars into $CONFIG ..."
@@ -28,5 +33,3 @@ then
 else
     echo "$CONFIG is already interpolated and will be reused ..."
 fi
-#run the server using the config
-martin --config $CONFIG

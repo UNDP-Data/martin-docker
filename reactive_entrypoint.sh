@@ -22,9 +22,8 @@ fi
 if [ ! -z "$AZURE_CFG" ]
 then
       echo "***********************************************************"
-      echo "***** starting martin server in remote mode    ************"
-      echo "***** changes to remote config will be synced  ************"
-      echo "***** to server every $SLEEP_SEC seconds       ************"
+      echo "****************     REMOTE MODE     **********************"
+      echo "***************  SLEEP_SEC=$SLEEP_SEC    ******************"
       echo "***********************************************************"
       CFG="./cfg.yaml"
       TMP_CONFIG="./tmp_cfg.yaml"
@@ -61,7 +60,6 @@ then
             fi
 
         else
-            echo "no changes have been detected"
             if [ ! -f "$CONFIG" ]
             then
                 echo "creating local config file $CONFIG from remote config "
@@ -77,14 +75,11 @@ then
             fi
 
         fi
-        echo 'going to sleep for $SLEEP_SEC secs'
         sleep $SLEEP_SEC
       done
 else
       echo "***********************************************************"
-      echo "***** starting martin server in DB mode  ******************"
-      echo "***** changes in DB will be synced       ******************"
-      echo "***** to server instantly                ******************"
+      echo "*********************     DB MODE    **********************"
       echo "***********************************************************"
       $PROG
 

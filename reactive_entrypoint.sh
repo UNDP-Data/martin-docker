@@ -1,10 +1,5 @@
 #!/bin/sh
 
-if [ -f .env ]; then
-    # Load Environment Variables
-    export $(cat .env | grep -v '#' | awk '/=/ {print $1}')
-
-fi
 
 
 # exit with error code 1 if the env variable DATABASE_URL is not set or empty
@@ -19,21 +14,21 @@ fi
 
 i=0
 PROG="martin"
-SLEEP_SEC=10
+SLEEP_SEC=900
 if [ ! -z "$AZURE_CFG" ]
 then
       echo "***********************************************************"
-      echo "***** starting martin server in remote mode ***************"
-      echo "***** changes to remote config will be synced **************"
-      echo "***** to server every $SLEEP_SEC seconds ******************"
+      echo "***** starting martin server in remote mode    ************"
+      echo "***** changes to remote config will be synced  ************"
+      echo "***** to server every $SLEEP_SEC seconds       ************"
       echo "***********************************************************"
       CFG="./cfg.yaml"
       TMP_CONFIG="./tmp_cfg.yaml"
-
+      CONFIG="/etc/martin/config.yaml"
 
       while [ true ]
       do
-        # downlaod cfg if does not exist
+        # download cfg if does not exist
         if [ ! -f "$CFG" ]
         then
             curl $AZURE_CFG -o $CFG --silent
@@ -80,14 +75,13 @@ then
         sleep $SLEEP_SEC
       done
 else
-      if [ ! -z "$CONFIG" ]
-      then
-          echo "Using local config $CONFIG"
-          $PROG --config $CONFIG
-      else
-          echo "No config was detected connecting to the DB"
-          $PROG
-      fi
+      echo "***********************************************************"
+      echo "***** starting martin server in DB mode  ******************"
+      echo "***** changes in DB will be synced       ******************"
+      echo "***** to server instantly                ******************"
+      echo "***********************************************************"
+      $PROG
+
 fi
 
 

@@ -2,12 +2,12 @@ version: "3"
 
 services:
   martin:
-    #image: ghcr.io/undp-data/martin-docker:v0.0.3
+    image: ghcr.io/undp-data/martin-docker:latest
     build: .
     restart: unless-stopped
     container_name: martin_geohub
     ports:
-      - 3000:3000
+      - "80:3000"
     env_file:
       - .env
     # volumes:

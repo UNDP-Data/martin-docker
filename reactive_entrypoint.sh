@@ -14,7 +14,11 @@ fi
 
 i=0
 PROG="martin"
-SLEEP_SEC=900
+if [ -z "$SLEEP_SEC" ]
+then
+  SLEEP_SEC=900
+fi
+
 if [ ! -z "$AZURE_CFG" ]
 then
       echo "***********************************************************"
@@ -44,7 +48,7 @@ then
             echo "Changes have been detected in remote config file ... syncing..."
             envsubst < $TMP_CONFIG > $CONFIG
             mv $TMP_CONFIG $CFG
-            if [ ! -z "$MARTIN_PID" ];
+            if [ ! -z "$MARTIN_PID" ]
             then
                 echo "restarting $PROG process (pid=$MARTIN_PID)"
                 kill -15 $MARTIN_PID
@@ -57,7 +61,7 @@ then
             fi
 
         else
-
+            echo "no changes have been detected"
             if [ ! -f "$CONFIG" ]
             then
                 echo "creating local config file $CONFIG from remote config "
@@ -66,12 +70,14 @@ then
 
             fi
 
-            if [ -z "$MARTIN_PID" ];
+            if [ -z "$MARTIN_PID" ]
             then
+                echo "starting $PROG with $CONFIG "
                 $PROG --config $CONFIG &
             fi
 
         fi
+        echo 'going to sleep for $SLEEP_SEC secs'
         sleep $SLEEP_SEC
       done
 else

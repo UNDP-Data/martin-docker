@@ -1,4 +1,5 @@
 FROM maplibre/martin:main
+
 RUN apk add curl
 RUN apk add gettext
 RUN mkdir -p /etc/martin

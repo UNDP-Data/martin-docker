@@ -34,7 +34,8 @@ then
         # download cfg if does not exist
         if [ ! -f "$CFG" ]
         then
-            curl $AZURE_CFG -o $CFG --silent
+            #curl $AZURE_CFG -o $CFG --silent
+            cp $CONFIG $CFG
         fi
         #download temp cfg
         curl $AZURE_CFG -o $TMP_CONFIG --silent

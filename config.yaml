@@ -1,0 +1,7 @@
+listen_addresses: '0.0.0.0:3000'
+connection_string: '$DATABASE_URL'
+pool_size: 20
+keep_alive: 75
+woker_processes: 8
+watch: false
+danger_accept_invalid_certs: true

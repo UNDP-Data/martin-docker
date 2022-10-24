@@ -1,7 +1,5 @@
 #!/bin/sh
 
-
-
 # exit with error code 1 if the env variable DATABASE_URL is not set or empty
 
 if [ -z "$DATABASE_URL" ] && [ -z ${DATABASE_URL} ]

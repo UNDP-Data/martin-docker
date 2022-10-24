@@ -1,4 +1,5 @@
-FROM maplibre/martin:main
+FROM urbica/martin:latest
+
 
 RUN apk add curl
 RUN apk add gettext

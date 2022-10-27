@@ -1,4 +1,4 @@
-FROM urbica/martin:latest
+FROM maplibre/martin:latest
 
 
 RUN apk add curl

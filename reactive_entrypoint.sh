@@ -12,16 +12,16 @@ fi
 
 i=0
 PROG="martin"
-if [ -z "$SLEEP_SEC" ]
+if [ -z "$SLEEP_SECS" ]
 then
-  SLEEP_SEC=900
+  SLEEP_SECS=900
 fi
 
-if [ ! -z "$AZURE_CFG" ]
+if [ ! -z "$REMOTE_CFG" ]
 then
 echo "***********************************************************"
 echo "****************     REMOTE MODE     **********************"
-echo "***************  SLEEP_SEC=$SLEEP_SEC    ******************"
+echo "***************  SLEEP_SEC=$SLEEP_SECS    ******************"
 echo "***********************************************************"
       CFG="./cfg.yaml"
       TMP_CONFIG="./tmp_cfg.yaml"
@@ -29,14 +29,14 @@ echo "***********************************************************"
 
       while [ true ]
       do
-        # download cfg if does not exist
+        # copy cfg if does not exist
         if [ ! -f "$CFG" ]
         then
             #curl $AZURE_CFG -o $CFG --silent
             cp $CONFIG $CFG
         fi
         #download temp cfg
-        curl $AZURE_CFG -o $TMP_CONFIG --silent
+        curl $REMOTE_CFG -o $TMP_CONFIG --silent
         CFG_FILE_SIZE=$(stat -c%s "$CFG")
         NEW_CFG_FILE_SIZE=$(stat -c%s "$TMP_CONFIG")
         MARTIN_PID=$(pidof $PROG)
@@ -53,7 +53,7 @@ echo "***********************************************************"
                 $PROG --config $CONFIG &
 
               else
-                  echo "starting $PROG $MARTIN_PID"
+                  echo "starting $PROG"
                   #$PROG $CONFIG &
                   $PROG --config $CONFIG &
             fi
@@ -74,7 +74,7 @@ echo "***********************************************************"
             fi
 
         fi
-        sleep $SLEEP_SEC
+        sleep $SLEEP_SECS
       done
 else
 echo "***********************************************************"

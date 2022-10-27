@@ -3,6 +3,7 @@ version: "3"
 services:
   martin:
     image: ghcr.io/undp-data/martin-docker:latest
+    #pull_policy: always
     restart: unless-stopped
     container_name: martin
     ports:
